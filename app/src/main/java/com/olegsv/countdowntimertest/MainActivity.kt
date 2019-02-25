@@ -13,9 +13,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
         start_timer.setOnClickListener {
-            myCountDownTimer = MyCountDownTimer(10000, 1000)
+            myCountDownTimer = MyCountDownTimer(30_000, 1_000)
             myCountDownTimer!!.start()
+            start_timer.isEnabled = false
         }
 
         stop_timer.setOnClickListener {
@@ -30,11 +32,14 @@ class MainActivity : AppCompatActivity() {
 
             val progress = (millisUntilFinished / 1000).toInt()
 
+            text_tv.text = progress.toString()
+
             progressBar.progress = progressBar.max - progress
         }
 
         override fun onFinish() {
-            finish()
+//            finish()
+            start_timer.isEnabled = true
         }
     }
 }
